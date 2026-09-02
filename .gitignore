@@ -1,0 +1,12 @@
+build/
+dist/
+advance.nro
+advance.elf
+advance.nacp
+*.map
+*.lst
+__pycache__/
+*.pyc
+.DS_Store
+.vscode/
+.idea/

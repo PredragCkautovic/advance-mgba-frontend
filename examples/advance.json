@@ -1,0 +1,17 @@
+{
+  "title": "Example ROM Hack",
+  "short_title": "Example Hack",
+  "author": "Hack Author",
+  "version": "1.0",
+  "base_game": "Game Boy Advance",
+  "genre": ["RPG", "ROM Hack"],
+  "tags": ["Challenge", "Quality of Life"],
+  "description": "Optional metadata lets Advance present a richer title, author, version, tags, artwork, and screenshots without renaming the ROM file.",
+  "release_year": 2026,
+  "cover": "cover.png",
+  "banner": "banner.jpg",
+  "screenshots": [
+    "screenshot1.png",
+    "screenshot2.png"
+  ]
+}

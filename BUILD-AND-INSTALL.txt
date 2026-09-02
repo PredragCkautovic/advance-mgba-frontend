@@ -1,0 +1,86 @@
+ADVANCE 0.1 — BUILD + INSTALL / UPGRADE
+========================================
+
+Default layout used by Advance:
+  SD:/mGBA/Roms/<game folder>/<rom>.gba + artwork + optional advance.json
+  SD:/switch/mgba.nro
+
+Build on Arch/Linux with Docker:
+  cd ~/Downloads
+  unzip Advance-mGBA-Frontend-v0.1-source.zip
+  cd advance-mgba-frontend-v0.1
+  chmod +x scripts/*.sh tools/*.py
+  ./scripts/build-docker.sh
+
+Result:
+  ./advance.nro
+
+Upgrade an existing Advance installation:
+  ./scripts/upgrade-existing-sd.sh /run/media/$USER/YOUR_SWITCH_SD
+
+Fresh install:
+  ./scripts/install-to-sd.sh /run/media/$USER/YOUR_SWITCH_SD
+
+The installer/updater does not move, rename or delete ROMs, mGBA, artwork,
+favorites, history, title overrides or custom collections.
+
+MAIN SECTIONS
+  Home          Personal dashboard and shelves
+  Library       Full game gallery
+  Collections   Smart and custom collections
+  Favorites     Fast filtered library view
+  Recent        Recently played library view
+  Search        Metadata-aware search
+  Settings      Appearance, sound and behavior
+
+HOME
+  D-pad / stick Browse shelves and games
+  A             Play
+  X             Details
+  Y             Favorite
+  R             Surprise Me
+  L             Library
+  -             Search
+  +             Settings
+  B             Exit
+
+LIBRARY
+  D-pad / stick Browse
+  A             Play
+  X             Details
+  Y             Sort
+  L             Favorites
+  R             Recent
+  ZL/ZR         Previous / next page
+  -             Search
+  B             Home
+
+DETAILS
+  A             Play
+  Y             Favorite
+  X             Edit display title
+  R             Add/remove from custom collections
+  ZR            Mark completed / uncompleted
+  ZL            Hide / unhide
+  -             Restore automatic display title
+  B             Back
+
+OPTIONAL METADATA
+  Add advance.json beside a ROM for definitive title, author, version, base game,
+  genres, tags, description, year, cover, hero/banner and screenshot metadata.
+  See examples/advance.json or SD:/switch/advance/advance.json.example.
+
+LIBRARY QA
+  python3 tools/library-doctor.py "/run/media/$USER/YOUR_SWITCH_SD/mGBA/Roms" \
+    --json-report ~/Downloads/advance-library-report.json
+
+  To create advance.json stubs only for games that do not already have one:
+  python3 tools/library-doctor.py "/run/media/$USER/YOUR_SWITCH_SD/mGBA/Roms" \
+    --write-missing-metadata
+
+If the Switch profile is not displayed, inspect:
+  SD:/switch/advance/diagnostics.log
+
+Optional profile fallback files:
+  SD:/switch/advance/profile.png
+  SD:/switch/advance/profile.txt

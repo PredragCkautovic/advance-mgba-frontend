@@ -1,0 +1,8 @@
+#include "parts/app_01.inc"
+#include "parts/app_02.inc"
+#include "parts/app_03.inc"
+#include "parts/app_04.inc"
+#include "parts/app_05.inc"
+#include "parts/app_06.inc"
+#include "parts/app_07.inc"
+#include "parts/app_08.inc"
