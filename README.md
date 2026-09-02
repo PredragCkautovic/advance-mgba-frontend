@@ -1,99 +1,174 @@
+<div align="center">
+
+<img src="assets/store-icon.png" alt="Advance logo" width="180">
+
 # Advance
 
-**Advance** is a native Nintendo Switch homebrew frontend that turns an existing mGBA ROM collection into a polished, personal Game Boy Advance library experience.
+### A premium Game Boy Advance library frontend for Nintendo Switch
 
-Advance does **not** emulate games itself and does not include ROMs, copyrighted game artwork, or downloads. It launches the user's existing mGBA installation and works with locally owned ROM dumps and artwork.
+Turn an existing **mGBA** setup into a fast, polished, controller-first library with cover art, collections, favorites, play history, metadata, search, Switch profile integration, and an OLED-focused interface.
 
-> **Public alpha:** v0.1 is the first public release line. Expect active iteration while the UI, compatibility, metadata tooling, and store packaging are hardened.
+[![Build Advance](https://github.com/PredragCkautovic/advance-mgba-frontend/actions/workflows/build.yml/badge.svg)](https://github.com/PredragCkautovic/advance-mgba-frontend/actions/workflows/build.yml)
+[![Version](https://img.shields.io/badge/version-v0.1.0-ff3355)](VERSION)
+[![Platform](https://img.shields.io/badge/platform-Nintendo%20Switch-e60012)](#requirements)
+[![License](https://img.shields.io/badge/license-MIT-7f5af0)](LICENSE)
 
-## v0.1
+**Public alpha · v0.1**
 
-Advance v0.1 packages the current feature set as the first public alpha and pushes it into a more definitive, store-ready direction with a stronger sidebar, refined home presentation, and more premium navigation behavior:
+[Features](#features) · [Install](#installation) · [Metadata](#game-metadata) · [Controls](#controls) · [Build](#building-from-source)
 
-- new neon handheld-style Advance icon, plus high-resolution store branding assets
-- larger OLED-friendly Home shelves with eight stronger cover cards instead of a dense wall
-- adaptive game accent colors derived from cover artwork
+</div>
+
+---
+
+## What is Advance?
+
+**Advance** is a native Nintendo Switch homebrew frontend for people who already use **mGBA** and want their Game Boy Advance collection to feel more like a complete console library than a folder of ROM files.
+
+It scans your existing collection, matches local artwork, builds personalized shelves, tracks library activity, exposes rich metadata, and launches games through your existing mGBA installation.
+
+Advance is a **frontend, not an emulator**.
+
+It does **not** include:
+
+- ROMs
+- BIOS files
+- commercial box art
+- game downloads
+- mGBA itself
+
+Use ROMs and artwork you are legally entitled to use.
+
+> [!IMPORTANT]
+> Advance v0.1 is an early public alpha. The current build is functional and CI-tested, but compatibility, performance, UI polish, and release packaging are still being actively improved.
+
+---
+
+## Features
+
+### Console-style Home experience
+
+- dynamic game-art backgrounds
 - time-aware greeting using the Switch clock
-- richer Spotlight hero with Resume/Play state, metadata chips, activity stats, favorites/completion totals, and total tracked play time
-- short screen transitions between major sections
-- polished mGBA launch/handoff screen
-- improved missing-art branding
-- cleaner Details metadata and quick-action palette
-- configurable adaptive accents, screen transitions, and launch transitions
-- fixed Home touch hit testing when horizontal shelves have scrolled
+- real Switch profile nickname and avatar when Horizon exposes them
+- **Continue Playing**
+- **Recently Added**
+- **Favorites**
+- **Most Played**
+- contextual Pokémon / ROM Hack / Completed shelves
+- **Surprise Me** random-game discovery
+- Play / Resume state directly from the hero card
 
-## Navigation drawer
+### Full library frontend
 
-The left rail stays compact while browsing and expands into a full overlay drawer when focused. Home, Library, Collections, Favorites, Recent, Search, and Settings remain available without shifting the underlying layout.
+- recursive `.gba` ROM scanning
+- configurable 4–7 column layouts
+- configurable 2–3 row layouts
+- local cover-art discovery
+- branded fallback artwork
+- newly-added game indicators
+- Favorites, Recent, Search, and Collections views
+- sorting by:
+  - A–Z
+  - recently played
+  - launch count
+  - approximate play time
+  - recently added
+  - favorites
 
-- Left from the left-most content item opens the drawer
-- Up/Down changes destination
-- A opens
-- B or Right collapses
-- touch supports tap-to-expand and tap-to-open
+### Expandable navigation drawer
 
-## Home
+The left rail stays compact while browsing and expands into a full overlay drawer when focused.
 
-- dynamic game-art backdrop
-- personalized time-aware greeting and Switch profile
-- Spotlight hero
-- Continue Playing
-- Recently Added
+Available destinations:
+
+- Home
+- Library
+- Collections
 - Favorites
-- Most Played
-- smart Pokémon / ROM Hack / Completed shelves when applicable
-- Surprise Me random discovery
-- tracked launches, last played, favorites, completion state, and approximate play time
+- Recent
+- Search
+- Settings
 
-## Library
+The drawer overlays the current screen instead of shifting the entire layout.
 
-- recursive ROM scanning
-- 4–7 columns and 2–3 rows
-- Favorites / Recently Played / Search / collection shelves
-- sorting by A–Z, recent, launches, play time, recently added, or favorites
-- game-adaptive selection accents
-- branded missing-art fallback
-- NEW badges for newly indexed unplayed games
+### Game details and organization
 
-## Details
+Each title can expose:
 
-- cover art
-- title source
-- author / version / base game / genre / year metadata
+- full display title
+- author
+- version
+- base game
+- genres
+- tags
+- release year
 - description
-- play time, launch count, last played
 - screenshots
-- favorite, completed, hidden state
-- custom display title
+- launch count
+- last played timestamp
+- approximate play time
+- favorite state
+- completed state
+- hidden state
 - custom collection membership
 
-## Personalization
+### Personalization
 
-- real Switch profile nickname and avatar when Horizon exposes them
-- local `profile.png` / `profile.txt` fallback
-- six OLED themes: Crimson, Atomic Purple, Emerald, Midnight Gold, Ice Blue, Neon Coral
-- adaptive selected-game accents
-- dynamic backdrops and intensity control
-- screen and launch transitions
-- touch input
-- synthesized UI sounds and volume control
-- system clock, Wi-Fi, battery, and charging state
+- six OLED-oriented themes:
+  - Crimson
+  - Atomic Purple
+  - Emerald
+  - Midnight Gold
+  - Ice Blue
+  - Neon Coral
+- adaptive accent colors derived from game artwork
+- adjustable dynamic backdrop intensity
+- screen transitions
+- launch transition
+- UI sounds and volume control
+- touchscreen support
+- system clock, Wi-Fi, battery, and charging indicators
 
-## Expected SD layout
+---
 
-Advance defaults to the layout this project was built around:
+## Requirements
+
+You need:
+
+- a Nintendo Switch capable of running homebrew
+- mGBA already installed
+- your own Game Boy Advance ROM dumps
+- an SD card accessible from the Switch homebrew environment
+
+The default paths are:
+
+```text
+ROM library:  sdmc:/mGBA/Roms
+mGBA:         sdmc:/switch/mgba.nro
+Advance:      sdmc:/switch/advance/advance.nro
+```
+
+These paths are configurable.
+
+---
+
+## Recommended SD layout
 
 ```text
 SD:/
 ├── mGBA/
 │   └── Roms/
-│       ├── Example ROM Hack/
+│       ├── Example Game/
 │       │   ├── game.gba
 │       │   ├── cover.png
 │       │   ├── banner.jpg              # optional
 │       │   ├── screenshot1.png         # optional
-│       │   └── advance.json            # optional but recommended
-│       └── ...
+│       │   └── advance.json            # optional, recommended
+│       │
+│       └── Another Game/
+│           ├── A-3244 e.gba
+│           └── cover.png
 │
 └── switch/
     ├── mgba.nro
@@ -103,28 +178,66 @@ SD:/
         ├── state.tsv
         ├── titles.tsv
         ├── collections.tsv
-        ├── session.pending             # temporary play-time reconciliation state
+        ├── session.pending             # temporary play-time state
         └── diagnostics.log
 ```
 
-Your numbered ROM filenames can remain exactly as they are. Advance never renames or modifies them.
+Cryptic filenames such as `A-3244 e.gba` are completely fine. **Advance never renames or modifies your ROM files.**
 
-## Name resolution
+---
 
-Advance 0.1 resolves display titles in this order:
+## Installation
 
-1. manual title override from `titles.tsv`
-2. `advance.json` title
-3. legacy `title.txt`, `name.txt`, or sidecar metadata
-4. the best descriptive game-folder / cover-art filename candidate
-5. internal cartridge title
-6. raw filename only as a final fallback
+### Fresh install
 
-For ROM-hack collections, **`advance.json` is the definitive metadata source**.
+1. Build or obtain `advance.nro`.
+2. Mount your Switch SD card.
+3. Run:
 
-## `advance.json`
+```bash
+./scripts/install-to-sd.sh /path/to/mounted/sd
+```
 
-Put `advance.json` next to the ROM. Example:
+Or manually place the application at:
+
+```text
+SD:/switch/advance/advance.nro
+```
+
+### Upgrade an existing Advance installation
+
+```bash
+./scripts/upgrade-existing-sd.sh /path/to/mounted/sd
+```
+
+The upgrade script preserves your existing:
+
+- ROM library
+- mGBA installation
+- artwork
+- configuration
+- favorites and history
+- title overrides
+- collections
+
+---
+
+## Game metadata
+
+Advance works without manual metadata, but `advance.json` gives each game a definitive identity and richer Details page.
+
+Place it beside the ROM:
+
+```text
+Example Game/
+├── game.gba
+├── cover.png
+├── banner.jpg
+├── screenshot1.png
+└── advance.json
+```
+
+Example:
 
 ```json
 {
@@ -135,60 +248,94 @@ Put `advance.json` next to the ROM. Example:
   "base_game": "Game Boy Advance",
   "genre": ["RPG", "ROM Hack"],
   "tags": ["Challenge", "Quality of Life"],
-  "description": "Optional metadata gives Advance a richer title, author, version, tags, artwork, and screenshots.",
+  "description": "Optional metadata gives Advance a richer library presentation.",
   "release_year": 2026,
   "cover": "cover.png",
   "banner": "banner.jpg",
-  "screenshots": ["screenshot1.png", "screenshot2.png"]
+  "screenshots": [
+    "screenshot1.png",
+    "screenshot2.png"
+  ]
 }
 ```
 
-See `examples/advance.json`.
+See [`examples/advance.json`](examples/advance.json).
+
+### Display-name resolution
+
+Advance resolves names in this order:
+
+1. manual override from `titles.tsv`
+2. `advance.json`
+3. `title.txt`, `name.txt`, or legacy sidecar metadata
+4. best descriptive folder / artwork filename
+5. internal GBA cartridge title
+6. raw ROM filename as a final fallback
+
+For large ROM-hack collections, `advance.json` is the recommended source of truth.
+
+---
 
 ## Controls
 
-### Global drawer
-- Left from the left-most item — open navigation drawer
-- Up / Down — choose destination
-- `A` — open destination
-- `B` or Right — close drawer
-- Touch — tap rail to expand; tap destination to open
+### Navigation drawer
+
+| Input | Action |
+|---|---|
+| Left from left-most content | Open drawer |
+| Up / Down | Select destination |
+| A | Open destination |
+| B / Right | Close drawer |
+| Touch | Expand / select / open |
 
 ### Home
-- D-pad / left stick — browse games and shelves
-- `A` — play
-- `X` — details
-- `Y` — favorite
-- `R` — Surprise Me
-- `L` — library
-- `-` — search
-- `+` — settings
-- `B` — exit
+
+| Input | Action |
+|---|---|
+| D-pad / Left Stick | Browse shelves |
+| A | Play / Resume |
+| X | Details |
+| Y | Favorite |
+| R | Surprise Me |
+| L | Library |
+| - | Search |
+| + | Settings |
+| B | Exit |
 
 ### Library
-- D-pad / left stick — browse
-- `A` — play
-- `X` — details
-- `Y` — cycle sort mode
-- `L` — Favorites
-- `R` — Recently Played
-- `ZL` / `ZR` — page
-- `-` — search
-- `B` — Home
+
+| Input | Action |
+|---|---|
+| D-pad / Left Stick | Browse |
+| A | Play |
+| X | Details |
+| Y | Cycle sort mode |
+| L | Favorites |
+| R | Recently Played |
+| ZL / ZR | Previous / next page |
+| - | Search |
+| B | Home |
 
 ### Details
-- `A` — play
-- `Y` — favorite
-- `X` — edit display title
-- `R` — custom collections
-- `ZR` — mark completed
-- `ZL` — hide/unhide
-- `-` — restore automatic title
-- `B` — back
 
-## Building
+| Input | Action |
+|---|---|
+| A | Play |
+| Y | Favorite |
+| X | Edit display title |
+| R | Custom collections |
+| ZR | Mark completed |
+| ZL | Hide / unhide |
+| - | Restore automatic title |
+| B | Back |
+
+---
+
+## Building from source
 
 ### Docker — recommended
+
+The repository includes a reproducible devkitPro Docker build:
 
 ```bash
 chmod +x scripts/*.sh tools/*.py
@@ -201,7 +348,7 @@ Output:
 advance.nro
 ```
 
-The Docker build script hands generated artifacts back to the host UID/GID so build folders are not left root-owned.
+The script restores generated build artifacts to your host UID/GID, avoiding root-owned build directories.
 
 ### Local devkitPro
 
@@ -209,78 +356,151 @@ The Docker build script hands generated artifacts back to the host UID/GID so bu
 ./scripts/build-local.sh
 ```
 
-Requires devkitPro / devkitA64, libnx, SDL2, SDL2_image, and SDL2_ttf.
+Requires:
 
-## Install / upgrade
+- devkitPro / devkitA64
+- libnx
+- SDL2
+- SDL2_image
+- SDL2_ttf
 
-Fresh install:
+### Continuous integration
 
-```bash
-./scripts/install-to-sd.sh /path/to/mounted/sd
-```
+Every push to `main` is built by GitHub Actions using the official devkitPro image. The public v0.1 source has already completed this CI build successfully.
 
-Upgrade an existing Advance install:
+Build artifacts are uploaded by the workflow as **Advance-Switch**.
 
-```bash
-./scripts/upgrade-existing-sd.sh /path/to/mounted/sd
-```
-
-The upgrade script preserves mGBA, ROMs, artwork, `config.ini`, favorites/history, title overrides, and collections.
+---
 
 ## Desktop library tools
 
-### Full doctor
+Advance ships with utilities for cleaning up and enriching large ROM collections.
+
+### Library doctor
 
 ```bash
 python3 tools/library-doctor.py "/path/to/mGBA/Roms"
 ```
 
-JSON report:
+Generate a JSON report:
 
 ```bash
 python3 tools/library-doctor.py "/path/to/mGBA/Roms" \
   --json-report ~/Downloads/advance-library-report.json
 ```
 
-Create `advance.json` stubs only where metadata is missing:
+Create starter `advance.json` files only where metadata is missing:
 
 ```bash
 python3 tools/library-doctor.py "/path/to/mGBA/Roms" \
   --write-missing-metadata
 ```
 
-The doctor reports missing art, weak titles, invalid metadata, missing referenced files, archive-ID folders, and possible duplicate ROM payloads. It never renames ROMs.
+The doctor can identify:
 
-### Interactive metadata wizard
+- missing artwork
+- weak or cryptic titles
+- invalid metadata
+- missing referenced files
+- archive-ID-style folder names
+- possible duplicate ROM payloads
+
+It never renames ROMs by default.
+
+### Metadata wizard
 
 ```bash
-python3 tools/metadata-wizard.py "/path/to/mGBA/Roms/Example ROM Hack"
+python3 tools/metadata-wizard.py "/path/to/mGBA/Roms/Example Game"
 ```
 
-### Existing artwork sync
+### Artwork sync
 
-`cover-sync.py` can fuzzy-match locally owned artwork. It never downloads anything.
+`tools/cover-sync.py` can fuzzy-match **locally owned** artwork to games. It does not download artwork from the internet.
 
-## Play-time note
+---
 
-Advance hands execution to mGBA. Before launch it stores a tiny pending-session marker; when Advance is opened again it reconciles the elapsed time, capped at 12 hours. This provides useful library history without modifying mGBA, but it is intentionally described as **approximate play time** rather than frame-perfect telemetry.
+## Approximate play-time tracking
 
-## Public release posture
+Advance hands execution to mGBA rather than embedding the emulator.
 
-The repository includes:
+Before launching a game, Advance writes a small pending-session marker. When Advance is opened again, it reconciles the elapsed time and adds it to that game's library history, with a safety cap of 12 hours per unresolved session.
 
-- reproducible Docker build
-- GitHub Actions build workflow
-- Homebrew App Store preparation notes
-- release checklist
-- changelog
-- MIT license
-- no ROM/art downloads
-- no bundled copyrighted box art
-- safe migration from 2.x state/config formats
+Because Advance is not receiving frame-perfect telemetry directly from mGBA, the UI deliberately describes this as **approximate play time**.
 
-Before a public Homebrew App Store submission, test on real hardware in both full-memory title-override mode and any applet mode you intend to support.
+---
+
+## Project status
+
+### v0.1 public alpha
+
+Already working:
+
+- native Switch frontend
+- real mGBA launching
+- library scanning
+- artwork
+- Home experience
+- collections
+- favorites
+- recent games
+- search
+- metadata
+- profile integration
+- play history
+- themes
+- touch input
+- CI builds
+
+Current priorities for the `v0.x` line:
+
+- broader hardware QA
+- faster library scanning and caching
+- additional UI polish
+- stronger error recovery
+- improved metadata workflows
+- release packaging
+- Homebrew App Store readiness
+
+See [`CHANGELOG.md`](CHANGELOG.md) and [`RELEASE-CHECKLIST.md`](RELEASE-CHECKLIST.md).
+
+---
+
+## Contributing
+
+Issues, bug reports, UI feedback, and pull requests are welcome.
+
+Please read [`CONTRIBUTING.md`](CONTRIBUTING.md) before submitting larger changes.
+
+When reporting a Switch-specific issue, include where possible:
+
+- Advance version
+- Atmosphère / homebrew launch mode
+- whether full-memory title override or applet mode was used
+- relevant `diagnostics.log` output
+- reproduction steps
+
+---
+
+## Legal
+
+Advance is an independent homebrew project and is **not affiliated with or endorsed by Nintendo or the mGBA project**.
+
+Nintendo, Game Boy Advance, and related names and marks belong to their respective owners.
+
+Advance does not provide ROMs, BIOS files, copyrighted game artwork, or commercial game downloads.
+
+---
 
 ## License
 
-MIT. See `LICENSE`.
+Advance is released under the **MIT License**. See [`LICENSE`](LICENSE).
+
+---
+
+<div align="center">
+
+### Your GBA library. Your way.
+
+Built for the Nintendo Switch homebrew community.
+
+</div>
