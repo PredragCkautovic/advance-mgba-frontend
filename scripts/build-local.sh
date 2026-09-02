@@ -5,6 +5,7 @@ cd "$ROOT"
 
 if [[ -z "${DEVKITPRO:-}" ]]; then
   if [[ -f /etc/profile.d/devkit-env.sh ]]; then
+    # shellcheck disable=SC1091
     source /etc/profile.d/devkit-env.sh
   fi
 fi

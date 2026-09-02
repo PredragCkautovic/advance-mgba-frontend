@@ -2,8 +2,8 @@
 set -euo pipefail
 
 BASE="${1:-$HOME/Downloads}"
-CURRENT_DIR="advance-mgba-frontend-v0.1"
-CURRENT_ZIP="Advance-mGBA-Frontend-v0.1-source.zip"
+CURRENT_DIR="advance-mgba-frontend-v0.4"
+CURRENT_ZIP="Advance-mGBA-Frontend-v0.4-source.zip"
 
 [[ -d "$BASE" ]] || { echo "Not a directory: $BASE"; exit 1; }
 
@@ -13,6 +13,8 @@ echo
 
 shopt -s nullglob
 candidates=(
+  "$BASE/advance-mgba-frontend-v0.1"
+  "$BASE/Advance-mGBA-Frontend-v0.1-source.zip"
   "$BASE/advance-mgba-frontend"
   "$BASE/advance-mgba-frontend-v1."*
   "$BASE/advance-mgba-frontend-v2."*

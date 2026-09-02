@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compatibility audit for Advance 0.1; use library-doctor.py for deeper checks."""
+"""Compatibility audit for Advance 0.4; use library-doctor.py for deeper checks."""
 from __future__ import annotations
 import argparse
 import csv
@@ -8,6 +8,7 @@ import subprocess
 import sys
 import tempfile
 from pathlib import Path
+
 
 def main() -> int:
     ap = argparse.ArgumentParser()
@@ -18,7 +19,8 @@ def main() -> int:
     with tempfile.TemporaryDirectory() as td:
         report = Path(td) / "report.json"
         rc = subprocess.call([sys.executable, str(doctor), str(args.rom_root), "--json-report", str(report)])
-        if rc: return rc
+        if rc:
+            return rc
         rows = json.loads(report.read_text(encoding="utf-8"))
         if args.csv:
             args.csv.parent.mkdir(parents=True, exist_ok=True)

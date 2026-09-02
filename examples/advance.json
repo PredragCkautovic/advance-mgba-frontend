@@ -1,17 +1,18 @@
 {
-  "title": "Example ROM Hack",
-  "short_title": "Example Hack",
-  "author": "Hack Author",
-  "version": "1.0",
-  "base_game": "Game Boy Advance",
+  "title": "Pokemon Radical Red Definitive",
+  "short_title": "Radical Red",
+  "author": "ROM Hack Author",
+  "version": "4.1",
+  "base_game": "Pokemon FireRed",
   "genre": ["RPG", "ROM Hack"],
-  "tags": ["Challenge", "Quality of Life"],
-  "description": "Optional metadata lets Advance present a richer title, author, version, tags, artwork, and screenshots without renaming the ROM file.",
+  "tags": ["Pokemon", "Difficulty", "Modern mechanics"],
+  "description": "A challenging enhancement hack with expanded encounters, modern mechanics, and extensive quality-of-life improvements.",
   "release_year": 2026,
   "cover": "cover.png",
   "banner": "banner.jpg",
   "screenshots": [
     "screenshot1.png",
-    "screenshot2.png"
+    "screenshot2.png",
+    "screenshot3.png"
   ]
 }

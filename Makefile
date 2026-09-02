@@ -16,7 +16,7 @@ INCLUDES    := include
 
 APP_TITLE   := Advance
 APP_AUTHOR  := Advance Project
-APP_VERSION := 0.1.0
+APP_VERSION := 0.4.0
 ICON        := icon.jpg
 
 ARCH        := -march=armv8-a+crc+crypto -mtune=cortex-a57 -mtp=soft -fPIE

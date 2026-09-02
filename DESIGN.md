@@ -1,4 +1,4 @@
-# Advance 0.1 Design System
+# Advance 0.4 Design System
 
 Advance is intentionally an original console UI, not a clone of any first-party Nintendo application.
 

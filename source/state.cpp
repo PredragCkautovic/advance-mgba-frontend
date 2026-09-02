@@ -24,6 +24,7 @@ StateMap loadState(const std::string& path) {
         st.favorite = fields[1] == "1";
         try { st.launches = static_cast<std::uint32_t>(std::stoul(fields[2])); } catch (...) {}
         try { st.lastPlayed = static_cast<std::int64_t>(std::stoll(fields[3])); } catch (...) {}
+        // Advance 3.x fields. Old 2.x state files remain valid.
         if (fields.size() >= 5) st.hidden = fields[4] == "1";
         if (fields.size() >= 6) st.completed = fields[5] == "1";
         if (fields.size() >= 7) { try { st.playSeconds = static_cast<std::uint64_t>(std::stoull(fields[6])); } catch (...) {} }
@@ -39,6 +40,8 @@ bool saveState(const std::string& path, const std::vector<Game>& games) {
     std::ofstream out(path, std::ios::trunc);
     if (!out) return false;
     for (const auto& g : games) {
+        // Persist every discovered game once addedAt is known so recently-added
+        // ordering remains stable across rescans and SD-card timestamp changes.
         out << g.path << '\t'
             << (g.favorite ? 1 : 0) << '\t'
             << g.launches << '\t'
@@ -85,6 +88,8 @@ bool reconcilePendingSession(StateMap& state, const std::string& pendingPath,
     }
     std::uint64_t elapsed = static_cast<std::uint64_t>(now - pending.startedAt);
     elapsed = std::min(elapsed, maxSessionSeconds);
+    // Ignore tiny accidental relaunches; everything else contributes to the
+    // user's play-time history when Advance is opened after mGBA.
     if (elapsed >= 15) state[pending.romPath].playSeconds += elapsed;
     clearPendingSession(pendingPath);
     return elapsed >= 15;

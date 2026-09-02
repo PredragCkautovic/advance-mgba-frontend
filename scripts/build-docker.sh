@@ -7,6 +7,9 @@ HOST_GID="$(id -g)"
 
 command -v docker >/dev/null 2>&1 || { echo "Docker is required for this build method."; exit 1; }
 
+# Build as root inside the official devkitPro image (the most compatible mode),
+# then hand generated artifacts back to the host user before the container exits.
+# This prevents the root-owned build/ directories older Advance releases left behind.
 docker run --rm \
   -e HOST_UID="$HOST_UID" \
   -e HOST_GID="$HOST_GID" \

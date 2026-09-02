@@ -1,6 +1,6 @@
 # Homebrew App Store release notes
 
-Advance is structured for public homebrew distribution, but a store submission should happen only after the v0.1 hardware QA checklist is complete.
+Advance is structured for public homebrew distribution, but a store submission should happen only after the v0.4 hardware QA checklist is complete.
 
 ## Distribution posture
 

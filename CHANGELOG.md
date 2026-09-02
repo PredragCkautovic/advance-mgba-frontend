@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.4.0 — Definitive polish pass
+
+- bundled Lucide-based navigation icon assets with ISC attribution
+- added a dedicated runtime sidebar brand mark and reused it across sidebar, Settings, About, boot, and missing-art states
+- refined compact and expanded navigation focus states
+- widened and polished the navigation drawer
+- strengthened top-level typography and header hierarchy
+- rebuilt footer hints as compact command groups
+- upgraded major-screen transitions with a cinematic diagonal light sweep
+- filled unused cover-card space with a dimmed artwork crop while preserving the full uncropped cover on top
+- improved selected-cover bloom and focus animation
+- rebuilt the Library selected-game strip with cover thumbnail, title hierarchy, state chips, page status, and Play/Resume action
+- fixed Home activity-stat truncation
+- improved empty Collection cards
+- simplified Settings presentation for end users
+- fixed archive/product-code title fallbacks such as `A-BPEE e`; descriptive metadata or ROM-header title now wins
+- mirrored the archive-code fix in desktop library-doctor tooling
+- install and upgrade scripts now deploy runtime brand and navigation assets automatically
+
 ## 0.1.0 — First public alpha
 
 Advance v0.1 is the first public release line of the project. It packages the current Switch-tested frontend foundation with:

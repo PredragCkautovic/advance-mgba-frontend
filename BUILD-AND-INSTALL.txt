@@ -1,4 +1,4 @@
-ADVANCE 0.1 — BUILD + INSTALL / UPGRADE
+ADVANCE 0.2 — BUILD + INSTALL / UPGRADE
 ========================================
 
 Default layout used by Advance:
@@ -7,8 +7,8 @@ Default layout used by Advance:
 
 Build on Arch/Linux with Docker:
   cd ~/Downloads
-  unzip Advance-mGBA-Frontend-v0.1-source.zip
-  cd advance-mgba-frontend-v0.1
+  unzip Advance-mGBA-Frontend-v0.4-source.zip
+  cd advance-mgba-frontend-v0.4
   chmod +x scripts/*.sh tools/*.py
   ./scripts/build-docker.sh
 

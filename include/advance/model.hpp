@@ -86,7 +86,7 @@ struct Config {
 
     int columns{6};
     int rows{2};
-    std::string theme{"crimson"};
+    std::string theme{"aurora-violet"};
     std::string accent{"red"}; // Legacy 2.x compatibility; theme wins in 3.x.
     bool useAccountProfile{true};
     bool showSystemStatus{true};

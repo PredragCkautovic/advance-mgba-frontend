@@ -1,6 +1,6 @@
-# Advance 0.1 public-release checklist
+# Advance 0.4 public-release checklist
 
-Use this before tagging `v0.1.0` or submitting Advance to a public homebrew catalog.
+Use this before tagging `v0.4.0` or submitting Advance to a public homebrew catalog.
 
 ## Hardware stability
 
@@ -134,8 +134,8 @@ Use this before tagging `v0.1.0` or submitting Advance to a public homebrew cata
 - [ ] `./scripts/build-local.sh` succeeds on a supported local devkitPro installation.
 - [ ] `python3 -m py_compile tools/*.py` succeeds.
 - [ ] Every shell script passes `bash -n`.
-- [ ] `CHANGELOG.md` matches `0.1.0`.
-- [ ] `APP_VERSION` in `Makefile` is `0.1.0`.
+- [ ] `CHANGELOG.md` matches `0.4.0`.
+- [ ] `APP_VERSION` in `Makefile` is `0.4.0`.
 - [ ] `./scripts/make-release.sh` produces the expected SD-root ZIP.
 - [ ] Fresh install script works on an empty `switch/advance` folder.
 - [ ] Upgrade script preserves config, state, title overrides and collections from 2.x.

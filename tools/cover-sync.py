@@ -12,8 +12,10 @@ from pathlib import Path
 IMAGE_EXTS = {".png", ".jpg", ".jpeg", ".webp"}
 ROM_EXTS = {".gba", ".agb", ".gb", ".gbc"}
 
+
 def norm(s: str) -> str:
     return re.sub(r"[^a-z0-9]", "", s.lower())
+
 
 def main() -> int:
     p = argparse.ArgumentParser()
@@ -21,11 +23,13 @@ def main() -> int:
     p.add_argument("art_dir", type=Path)
     p.add_argument("output_dir", type=Path)
     args = p.parse_args()
+
     args.output_dir.mkdir(parents=True, exist_ok=True)
     art = {}
     for f in args.art_dir.rglob("*"):
         if f.is_file() and f.suffix.lower() in IMAGE_EXTS:
             art.setdefault(norm(f.stem), f)
+
     copied = 0
     missing = []
     for rom in sorted(args.rom_dir.rglob("*")):
@@ -34,6 +38,7 @@ def main() -> int:
         key = norm(rom.stem)
         source = art.get(key)
         if not source:
+            # Try containment for release-tag differences such as "(USA)".
             candidates = [v for k, v in art.items() if key in k or k in key]
             source = candidates[0] if len(candidates) == 1 else None
         if source:
@@ -42,12 +47,16 @@ def main() -> int:
             copied += 1
         else:
             missing.append(rom.name)
+
     print(f"Copied {copied} covers")
     if missing:
         print(f"No unique match for {len(missing)} ROM(s):")
-        for name in missing[:40]: print(f"  - {name}")
-        if len(missing) > 40: print(f"  ... and {len(missing)-40} more")
+        for name in missing[:40]:
+            print(f"  - {name}")
+        if len(missing) > 40:
+            print(f"  ... and {len(missing)-40} more")
     return 0
+
 
 if __name__ == "__main__":
     raise SystemExit(main())

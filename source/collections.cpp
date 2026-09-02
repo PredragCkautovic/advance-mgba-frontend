@@ -40,8 +40,11 @@ std::vector<CustomCollection> loadCustomCollections(const std::string& path) {
         const std::string rom = clean(line.substr(tab + 1));
         if (name.empty() || rom.empty()) continue;
         auto it = std::find_if(result.begin(), result.end(), [&](const CustomCollection& c) { return c.name == name; });
-        if (it == result.end()) result.push_back(CustomCollection{name, {rom}});
-        else if (std::find(it->romPaths.begin(), it->romPaths.end(), rom) == it->romPaths.end()) it->romPaths.push_back(rom);
+        if (it == result.end()) {
+            result.push_back(CustomCollection{name, {rom}});
+        } else if (std::find(it->romPaths.begin(), it->romPaths.end(), rom) == it->romPaths.end()) {
+            it->romPaths.push_back(rom);
+        }
     }
     std::sort(result.begin(), result.end(), [](const CustomCollection& a, const CustomCollection& b) {
         return normalizeName(a.name) < normalizeName(b.name);
@@ -73,7 +76,9 @@ void setCollectionMembership(CustomCollection& collection, const std::string& ro
     auto it = std::find(collection.romPaths.begin(), collection.romPaths.end(), romPath);
     if (member) {
         if (it == collection.romPaths.end()) collection.romPaths.push_back(romPath);
-    } else if (it != collection.romPaths.end()) collection.romPaths.erase(it);
+    } else if (it != collection.romPaths.end()) {
+        collection.romPaths.erase(it);
+    }
 }
 
 std::vector<Collection> buildCollections(const std::vector<Game>& games,

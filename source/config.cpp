@@ -108,7 +108,7 @@ bool saveConfig(const std::string& path, const Config& config) {
     std::filesystem::create_directories(std::filesystem::path(path).parent_path(), ec);
     std::ofstream out(path, std::ios::trunc);
     if (!out) return false;
-    out << "# Advance 0.1 - premium mGBA library frontend\n"
+    out << "# Advance 0.4 - beautiful mGBA library frontend\n"
         << "# Paths use libnx sdmc:/ notation. Existing 2.x configs are migrated automatically.\n\n"
         << "[library]\n"
         << "rom_dir=" << config.romDir << "\n"
@@ -132,6 +132,9 @@ bool saveConfig(const std::string& path, const Config& config) {
         << "ui_volume=" << config.uiVolume << "\n"
         << "dynamic_backdrop=" << (config.dynamicBackdrop ? "true" : "false") << "\n"
         << "backdrop_intensity=" << config.backdropIntensity << "\n"
+        << "adaptive_accent=" << (config.adaptiveAccent ? "true" : "false") << "\n"
+        << "screen_transitions=" << (config.screenTransitions ? "true" : "false") << "\n"
+        << "launch_transition=" << (config.launchTransition ? "true" : "false") << "\n"
         << "show_cover_labels=" << (config.showCoverLabels ? "true" : "false") << "\n";
     return true;
 }

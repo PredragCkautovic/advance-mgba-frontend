@@ -1,4 +1,4 @@
-ADVANCE 0.1
+ADVANCE 0.2
 ============
 
 Native Game Boy Advance library frontend for mGBA on Nintendo Switch.
